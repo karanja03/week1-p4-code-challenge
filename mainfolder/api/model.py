@@ -1,10 +1,10 @@
-from flask import Flask
-from sqlalchemy import Column, Integer, String, Float, ForeignKey
-from mainfolder.api.dbconfig import db
+from flask_sqlalchemy import SQLAlchemy
+# from sqlalchemy import Column, Integer, String, Float, ForeignKey
 from sqlalchemy.orm import validates, relationship
 
+db = SQLAlchemy()
 class Pizzas(db.Model):
-    __tablename__='pizzas'
+    __tablename__='pizzas_table'
     
     id=db.Column(db.String(255), primary_key=True)
     name=db.Column(db.String, nullable=False)
@@ -12,7 +12,7 @@ class Pizzas(db.Model):
     created_at=db.Column(db.DateTime, nullable=False)
     updated_at=db.Column(db.DateTime, nullable=False)
     
-    def _repr_(self):
+    def __repr__(self):
         return f'{self.id}, {self.name}, {self.ingredients}, {self.created_at}, {self.updated_at}'
     
 
@@ -32,7 +32,7 @@ class Restaurants_Pizzas(db.Model):
     
 
 class Restaurants(db.Model):
-    __tablename__ = 'restaurants'
+    __tablename__ = 'restaurants_table'
     
     id=db.Column(db.String(255), primary_key=True)
     name=db.Column(db.String(50), unique=True, nullable=False)
