@@ -52,7 +52,7 @@ class Get_EachRestaurants(Resource):
         else:
             return {"error": "Restaurant not found"}, 404            
      
-class Get_Restaurants(Resource):
+class Delete_Restaurants(Resource):
     def delete(self, id):
         restaurant = Restaurants.query.get(id)
         if restaurant:

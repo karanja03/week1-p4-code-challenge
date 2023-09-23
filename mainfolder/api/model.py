@@ -1,6 +1,9 @@
 from flask_sqlalchemy import SQLAlchemy
-# from sqlalchemy import Column, Integer, String, Float, ForeignKey
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import Column, Integer, String, Float, ForeignKey
 from sqlalchemy.orm import validates, relationship
+import datetime
+Base = declarative_base()
 
 db = SQLAlchemy()
 class Pizzas(db.Model):
@@ -9,9 +12,8 @@ class Pizzas(db.Model):
     id=db.Column(db.String(255), primary_key=True)
     name=db.Column(db.String, nullable=False)
     ingredients=db.Column(db.String, nullable=False)
-    created_at=db.Column(db.DateTime, nullable=False)
-    updated_at=db.Column(db.DateTime, nullable=False)
-    
+    created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
+    updated_at = db.Column(db.DateTime, default=datetime.datetime.utcnow, onupdate=datetime.datetime.utcnow)    
     def __repr__(self):
         return f'{self.id}, {self.name}, {self.ingredients}, {self.created_at}, {self.updated_at}'
     
@@ -23,8 +25,9 @@ class Restaurants_Pizzas(db.Model):
     pizza_id=db.Column(db.String(255), db.ForeignKey("pizzas.id"))
     restaurant_id=db.Column(db.String(255), db.ForeignKey("restaurants.id"))
     price=db.Column(db.Float, nullable=False)
-    created_at=db.Column(db.DateTime, nullable=False)
-    updated_at=db.Column(db.DateTime, nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
+    updated_at = db.Column(db.DateTime, default=datetime.datetime.utcnow, onupdate=datetime.datetime.utcnow)    
+    
     restaurants= db.relationship('Restaurants', backref='parent')
     def __repr__(self):
         return f'{self.id}, {self.pizza_id}, {self.restaurant_id},{self.price}, {self.created_at}, {self.updated_at}'
