@@ -1,4 +1,4 @@
-#!/home/wambui/Phase4/CodeChallenges/week1-p4-code-challenge/venv/bin/python3
+#!/home/wambui/Phase4/CodeChallenges/week1-p4-code-challenge/venv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys
