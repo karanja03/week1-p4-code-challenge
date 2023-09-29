@@ -8,7 +8,7 @@ from server.models import Pizza, Restaurant, RestaurantPizza
 class Home(Resource):
     def get(self):
         # Create a response dictionary
-        response_dict = {"home": "Welcome to the Restaurant API."}
+        response_dict = {"home": "Welcome to My Restaurant API.Hope You will have a good time using it!!!."}
 
         # Create an HTTP response with the dictionary and status code 200 (OK)
         response = make_response(response_dict, 200)
